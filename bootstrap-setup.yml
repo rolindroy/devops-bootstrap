@@ -1,0 +1,7 @@
+---
+- name: Continues Integration Server Configuration
+  hosts: bootstrap-server
+  sudo: True
+  roles:
+    - git
+    - geerlingguy.jenkins

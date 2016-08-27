@@ -12,7 +12,7 @@ BT_Ssh_KeyName=bootstrap_id-rsa
 usage()
 {
 cat <<"USAGE"
-    Usage: sudo bash bootstrap.sh            
+    Usage: bash bootstrap.sh            
     --
     @author Rolind Roy < hello@rolindroy.com >
        
@@ -62,16 +62,22 @@ bootstrap_logger()
 	echo -e "\e[34mBootstrap::\e[0m" $1 >&2;
 }
 
+bootstrap_logger "Installing Curl"
+sudo apt-get -y install curl || bootstrap_handler $BT_Error "Unable to Install curl. Please fix the issue and try again." $BT_Die
+
 bootstrap_logger "Installing and configuring ansible on localhost"
 sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
 sudo sed -i '1i localhost' /etc/ansible/hosts
 BT_current_user=`who -m | awk '{print $1;}'`
+bootstrap_logger "Current working user : " $BT_current_user
 if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
-    ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Error "Unable to create ssh key pair." $BT_Die
-	cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
+	bootstrap_logger "Creating ssh pair."
+    ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Warning "Unable to create ssh key pair." $BT_Die
+	sudo cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
 fi
 
-ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
+ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
 
 bootstrap_handler $BT_OK "Ansible successfully installed and configured."
+
