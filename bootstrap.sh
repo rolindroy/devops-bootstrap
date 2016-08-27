@@ -69,12 +69,12 @@ bootstrap_logger "Installing and configuring ansible on localhost"
 sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
 sudo sed -i '1i localhost' /etc/ansible/hosts
-BT_current_user=`who -m | awk '{print $1;}'`
+BT_current_user=`whoami`
 bootstrap_logger "Current working user : " $BT_current_user
 if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
-	bootstrap_logger "Creating ssh pair."
+    bootstrap_logger "Creating ssh pair."
     ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Warning "Unable to create ssh key pair." $BT_Die
-	sudo cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
+    sudo cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
 fi
 
 ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
