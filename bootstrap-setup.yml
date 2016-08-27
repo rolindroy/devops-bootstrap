@@ -3,4 +3,5 @@
   hosts: bootstrap-server
   sudo: True
   roles:
-    - geerlingguy.jenkins
+    - geerlingguy.java
+    - jenkins
