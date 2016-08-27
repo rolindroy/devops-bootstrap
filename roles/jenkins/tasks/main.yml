@@ -1,0 +1,7 @@
+---
+
+# Installing Jenkins Server
+- include: install-jenkins.yml
+
+# Configuring Jenkins Server
+- include: configure-jenkins.yml

@@ -1,0 +1,21 @@
+---
+- name: Ensure dependencies are installed.
+  apt:
+    pkg: curl
+    state: installed
+
+- name: Add Jenkins apt repository key.
+  apt_key:
+    url: "{{ jenkins_repo_key }}"
+    state: present
+
+- name: Add Jenkins repo url to apt-chache.
+  apt_repository:
+    repo: "{{ jenkins_repo_url }}"
+    state: present
+    update_cache: yes
+
+- name: Install latest stable version of jenkins.
+  apt:
+    pkg: jenkins
+    state: latest

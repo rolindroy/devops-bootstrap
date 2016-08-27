@@ -1,0 +1,13 @@
+--
+#Default variables
+#Ref:: https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
+#
+# @Rolind Roy < hello@rolindroy.com >
+#----------------------------------------------------------------------------
+
+
+jenkins_repo_url: deb http://pkg.jenkins.io/debian-stable binary/
+jenkins_repo_key: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+jenkins_home_path: /var/lib/jenkins
+jenkins_port: 7070
+
