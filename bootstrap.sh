@@ -67,10 +67,11 @@ sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Instal
 
 sudo sed -i '1i localhost' /etc/ansible/hosts
 BT_current_user=`whoami`
-ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Error "Unable to create ssh key pair." $BT_Die
-cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
+if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
+    ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Error "Unable to create ssh key pair." $BT_Die
+	cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
+fi
 
-ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName \ 
-	|| bootstrap_handler $BT_Error "ansible ping failed, execute ansible -vvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName and fix the issue" $BT_Die
+ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
 
 bootstrap_handler $BT_OK "Ansible successfully installed and configured."
