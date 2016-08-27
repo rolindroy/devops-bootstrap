@@ -6,6 +6,9 @@ BT_Warning=300
 BT_OK=200
 BT_Die=1
 
+BT_KeyPath=~/.ssh
+BT_Ssh_KeyName=bootstrap_id-rsa
+
 usage()
 {
 cat <<"USAGE"
@@ -34,6 +37,7 @@ bootstrap_handler()
 	echo  -e "\t $2" 
 
 	if [[ $3 -eq 1 ]]; then
+		echo -e "bootstrap.sh exit with unkown error. exit 0"
 		exit 0
 	fi
 }
@@ -53,7 +57,20 @@ bootstrap_ok()
 	echo -e "\e[32m Ok : \e[0m" >&2;
 }
 
+bootstrap_logger()
+{
+	echo -e "\e[34mBootstrap::\e[0m" $1 >&2;
+}
 
-# sudo apt-get install vir || bootstrap_handler $BT_Warning "vir not found" $BT_Die
+bootstrap_logger "Installing and configuring ansible on localhost"
+sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
-echo -e "working"
+sudo sed -i '1i localhost' /etc/ansible/hosts
+BT_current_user=`whoami`
+ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Error "Unable to create ssh key pair." $BT_Die
+cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
+
+ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName \ 
+	|| bootstrap_handler $BT_Error "ansible ping failed, execute ansible -vvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName and fix the issue" $BT_Die
+
+bootstrap_handler $BT_OK "Ansible successfully installed and configured."
