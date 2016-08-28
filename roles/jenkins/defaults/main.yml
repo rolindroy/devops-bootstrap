@@ -13,5 +13,6 @@ jenkins_http_port: 7070
 jenkins_url_prefix: ""
 
 jenkins_hostname: localhost
+jenkins_jar_location: /opt/jenkins-cli.jar
 
 
