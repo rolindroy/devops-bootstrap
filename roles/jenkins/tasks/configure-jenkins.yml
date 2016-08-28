@@ -6,3 +6,34 @@
     regexp: '^HTTP_PORT='
     line: 'HTTP_PORT={{ jenkins_http_port }}'
   notify: jenkins-restart  
+  
+- name: Ensure URL prefix is present in Jenkins config.
+  lineinfile:
+    dest: "{{ jenkins_init_file }}"
+    insertafter: '^JENKINS_ARGS='
+    regexp: '^JENKINS_ARGS\+=" --prefix='
+    line: 'JENKINS_ARGS+=" --prefix={{ jenkins_url_prefix }}"'
+    state: present
+  register: jenkins_init_prefix
+
+- name: modify jenkins defaults to fix cli calls
+  lineinfile:
+    dest: "{{ jenkins_init_file }}"
+    line: 'JAVA_ARGS+=" -Dhudson.diyChunking=false "'
+    state: present
+  register: jenkins_init_cli_fix
+
+- name: modify jenkins defaults to set loose content security policy
+  lineinfile:
+    dest: "{{ jenkins_init_file }}"
+    line: >
+      JAVA_ARGS+=" -Djava.awt.headless=true -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts allow-same-origin; default-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'\""
+    state: present
+  register: jenkins_init_csp_fix
+  
+- name: Immediately restart Jenkins on init config changes.
+  service: name=jenkins state=restarted
+  when: >
+    jenkins_init_prefix.changed or
+    jenkins_init_cli_fix.changed or
+    jenkins_init_csp_fix.changed

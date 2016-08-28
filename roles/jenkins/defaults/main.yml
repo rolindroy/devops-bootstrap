@@ -10,4 +10,5 @@ jenkins_repo_key: http://pkg.jenkins.io/debian/jenkins-ci.org.key
 jenkins_home_path: /var/lib/jenkins
 jenkins_init_file: /etc/default/jenkins
 jenkins_http_port: 7070
+jenkins_url_prefix: ""
 
