@@ -1,0 +1,8 @@
+---
+- name: Updating Jenkins HTTP Port settings.
+  lineinfile:
+    backrefs: yes
+    dest: "{{ jenkins_init_file }}"
+    regexp: '^HTTP_PORT='
+    line: 'HTTP_PORT={{ jenkins_http_port }}'
+  notify: jenkins-restart  
