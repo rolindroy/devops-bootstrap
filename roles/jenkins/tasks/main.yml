@@ -5,3 +5,6 @@
 
 # Configuring Jenkins Server
 - include: configure-jenkins.yml
+
+# Settings :-P
+- include: settings.yml
