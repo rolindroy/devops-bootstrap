@@ -70,10 +70,10 @@ sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Instal
 
 sudo sed -i '1i localhost' /etc/ansible/hosts
 BT_current_user=`whoami`
-bootstrap_logger "Current working user : " $BT_current_user
+bootstrap_logger "Current working user : $BT_current_user"
 if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
     bootstrap_logger "Creating ssh pair."
-    ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -C $BT_current_user || bootstrap_handler $BT_Warning "Unable to create ssh key pair." $BT_Die
+    ssh-keygen -t rsa -b 4096 -f $BT_KeyPath/$BT_Ssh_KeyName -N '' -C $BT_current_user || bootstrap_handler $BT_Warning "Unable to create ssh key pair." $BT_Die
     sudo cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
 fi
 
