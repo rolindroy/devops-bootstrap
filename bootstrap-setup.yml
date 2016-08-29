@@ -2,6 +2,12 @@
 - name: Continues Integration Server Configuration
   hosts: bootstrap-server
   sudo: True
+  
+  vars:
+    jenkins_admin_users:
+      - username: admin
+        password: admin@123
+        
   roles:
     - geerlingguy.java
     - jenkins

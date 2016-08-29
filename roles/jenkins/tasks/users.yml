@@ -1,0 +1,35 @@
+---
+- name: generate user folders
+  file:
+    path: "/var/lib/jenkins/users/{{ item.username }}"
+    owner: jenkins
+    state: directory
+  with_items: "{{ jenkins_users }}"
+  register: jenkins_user_folders
+
+- name: generate password salt (4 chars)
+  shell: "date +%s | sha256sum | base64 | head -c 4 ; echo"
+  register: jenkins_password_salts
+  when: item.changed
+  with_items: "{{ jenkins_user_folders.results }}"
+
+- name: generate user passwords
+  shell: echo -n '{{ item.0.password }}{% raw %}{{% endraw %}{{ item.1.stdout }}{% raw %}}{% endraw %}' | sha256sum | head -c 64
+  register: jenkins_password_hashes
+  with_together:
+    - "{{ jenkins_users }}"
+    - "{{ jenkins_password_salts.results }}"
+  when: jenkins_password_salts.results and item.1.changed
+
+- name: generate user config files
+  template:
+    src: "users-config.xml.j2"
+    dest: "/var/lib/jenkins/users/{{ item.0.username }}/config.xml"
+    owner: jenkins
+    force: no
+  with_together:
+    - "{{ jenkins_users }}"
+    - "{{ jenkins_password_hashes.results }}"
+    - "{{ jenkins_password_salts.results }}"
+  when: jenkins_user_folders.changed and item.1.changed
+  notify: restart jenkins

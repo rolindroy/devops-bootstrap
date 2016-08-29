@@ -6,5 +6,8 @@
 # Configuring Jenkins Server
 - include: configure-jenkins.yml
 
+# creating admin users
+- include: users.yml jenkins_users="{{ jenkins_admin_users }}"
+
 # Settings :-P
 - include: settings.yml
