@@ -34,6 +34,9 @@
   template:
     src: basic-security.groovy
     dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+    owner: jenkins
+    group: jenkins
+    mode: 0775
   register: jenkins_users_config
   when: jenkins_install_package.changed
 
