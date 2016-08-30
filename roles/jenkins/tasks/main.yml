@@ -12,3 +12,5 @@
 # Settings :-P
 - include: settings.yml
 
+- include: plugins.yml
+
