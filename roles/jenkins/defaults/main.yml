@@ -15,4 +15,7 @@ jenkins_url_prefix: ""
 jenkins_hostname: localhost
 jenkins_jar_location: /opt/jenkins-cli.jar
 
+jenkins_init_changes:
+  - {option: "JENKINS_ARGS", value: "--prefix={{ jenkins_url_prefix }}"}
+  - {option: "JENKINS_JAVA_OPTIONS", value: "{{ jenkins_java_options }}"}
 
