@@ -22,11 +22,11 @@
         - wget
         
   roles:
-    - role: geerlingguy.java
+    - role: java
       when: "ansible_os_family == 'Debian'"
       java_packages:
         - openjdk-8-jdk
         
-    - role: geerlingguy.mysql
+    - role: mysql
         
     - role: jenkins
