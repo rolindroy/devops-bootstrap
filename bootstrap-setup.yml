@@ -8,7 +8,7 @@
       - username: admin
         password: admin@123
         
-  tasks:
+  pre_tasks:
     - name: installing repo for Java 8 in Ubuntu 14.04
       apt_repository: repo='ppa:openjdk-r/ppa'
       
