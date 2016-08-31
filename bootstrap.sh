@@ -84,6 +84,12 @@ bootstrap_handler $BT_OK "Ansible successfully installed and configured."
 bootstrap_logger "Dowloading files to install and configure java"
 ansible-galaxy install geerlingguy.java -p ./roles/
 
+bootstrap_logger "Dowloading files to install and configure Mysql Database"
+ansible-galaxy install geerlingguy.mysql -p ./roles/
+
+bootstrap_logger "Dowloading files to install and configure Maven"
+ansible-galaxy install tecris.maven -p ./roles/
+
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
 
