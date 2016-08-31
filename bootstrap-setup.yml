@@ -7,10 +7,13 @@
     jenkins_admin_users:
       - username: admin
         password: admin@123
-        
-    __java_packages:
-      - openjdk-8-jdk
+  tasks:
+    - name: installing repo for Java 8 in Ubuntu 14.04
+      apt_repository: repo='ppa:openjdk-r/ppa'
         
   roles:
     - geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
     - jenkins
