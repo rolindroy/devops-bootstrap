@@ -8,6 +8,17 @@
       - username: admin
         password: admin@123
         
+  pre_tasks:
+    - name: installing repo for Java 8 in Ubuntu 14.04
+      apt_repository: repo='ppa:openjdk-r/ppa'
+      
+    - name: updating apt-cache for java 8-jdk
+      apt: update_cache=yes
+        
   roles:
-    - geerlingguy.java
-    - jenkins
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+        
+    - role: jenkins

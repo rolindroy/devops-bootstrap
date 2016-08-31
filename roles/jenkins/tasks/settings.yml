@@ -15,3 +15,9 @@
   until: "'OK' in jarfile_get.msg or 'file already exists' in jarfile_get.msg"
   retries: 5
   delay: 10
+  
+- name: Remove Jenkins security init scripts after first startup.
+  file:
+    path: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+    state: absent
+    

@@ -11,8 +11,16 @@ jenkins_home_path: /var/lib/jenkins
 jenkins_init_file: /etc/default/jenkins
 jenkins_http_port: 7070
 jenkins_url_prefix: ""
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
 
 jenkins_hostname: localhost
 jenkins_jar_location: /opt/jenkins-cli.jar
 
+jenkins_admin_username: admin
+jenkins_admin_password: admin@123
 
+jenkins_init_changes:
+  - {option: "JENKINS_ARGS", value: "--prefix={{ jenkins_url_prefix }}"}
+  - {option: "JENKINS_JAVA_OPTIONS", value: "{{ jenkins_java_options }}"}
+
+jenkins_plugins: []

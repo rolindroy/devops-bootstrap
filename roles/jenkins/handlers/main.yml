@@ -1,14 +1,3 @@
 ---
 - name: restart jenkins
-  shell: >
-    java -jar {{ jenkins_jar_location }} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix | default('') }}/ safe-restart --username {{ jenkins_admin_users.0.username }} --password {{ jenkins_admin_users.0.password }}
-  notify: check availability
-  ignore_errors: yes
-
-- name: check availability
-  shell: "curl -D - --silent http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix }}/cli/"
-  register: result
-  until: (result.stdout.find("403 Forbidden") != -1) or (result.stdout.find("200 OK") != -1) and (result.stdout.find("Please wait while") == -1)
-  retries: "{{ jenkins_connection_retries }}"
-  delay: "{{ jenkins_connection_delay }}"
-  changed_when: false
+  service: name=jenkins state=restarted
