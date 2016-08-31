@@ -8,6 +8,9 @@
       - username: admin
         password: admin@123
         
+    __java_packages:
+      - openjdk-8-jdk
+        
   roles:
     - geerlingguy.java
     - jenkins
