@@ -12,8 +12,9 @@
       apt_repository: repo='ppa:openjdk-r/ppa'
         
   roles:
-    - geerlingguy.java
+    - role: geerlingguy.java
       when: "ansible_os_family == 'Debian'"
       java_packages:
         - openjdk-8-jdk
-    - jenkins
+        
+    - role: jenkins
