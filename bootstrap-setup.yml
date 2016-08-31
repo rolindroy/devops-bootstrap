@@ -7,9 +7,13 @@
     jenkins_admin_users:
       - username: admin
         password: admin@123
+        
   tasks:
     - name: installing repo for Java 8 in Ubuntu 14.04
       apt_repository: repo='ppa:openjdk-r/ppa'
+      
+    - name: updating apt-cache for java 8-jdk
+      apt: update_cache=yes
         
   roles:
     - role: geerlingguy.java
