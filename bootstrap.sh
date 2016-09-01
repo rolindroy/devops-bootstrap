@@ -65,21 +65,21 @@ bootstrap_logger()
 bootstrap_out()
 {
 	echo -e "\e[34mBootstrap:: bootstrap.sh
-		##########################################################
-		## DevOps Bootstrap script for Continuous Integration- 	##
-		## successfully completed. !				##
-		##							##
-		## Jenkins Server : 					##
-		##	http://<Ip_address>:7070			##
-		##	UserName : admin				##
-		##	Password : admin@123				##
-		## Sonar						##
-		##	http://<Ip_address>:9000			##
-		##	UserName : admin				##
-		##	Password : admin				##
-		##							##
-		## @author Rolind Roy < hello@rolindroy.com >		##
-		##########################################################
+##########################################################
+## DevOps Bootstrap script for Continuous Integration- 	##
+## successfully completed. !				##
+##							##
+## Jenkins Server : 					##
+##	http://<Ip_address>:7070			##
+##	UserName : admin				##
+##	Password : admin@123				##
+## Sonar						##
+##	http://<Ip_address>:9000			##
+##	UserName : admin				##
+##	Password : admin				##
+##							##
+## @author Rolind Roy < hello@rolindroy.com >		##
+##########################################################
 	 \e[0m" $1 >&2;
 }
 
@@ -114,4 +114,4 @@ mv ./roles/geerlingguy.mysql ./roles/mysql
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
 
-$? || bootstrap_out
+bootstrap_out
