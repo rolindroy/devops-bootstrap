@@ -1,0 +1,46 @@
+---
+
+## Installing Maven
+
+- name: Add Apache Maven repo url to apt-chache.
+  apt_repository:
+    repo: "{{ maven_repo_url }}"
+    state: present
+    update_cache: yes
+
+- name: Updating apt-chache for apache maven
+  apt: update_cache=yes
+  
+- name: Install latest stable version of Maven.
+  apt:
+    pkg: maven
+    state: latest
+   
+- name: Update the symbolic link to the Maven install
+  file: >
+    src={{ maven_ln_src_dir }}
+    dest={{ maven_ln_dest_dir }}
+    state=link
+    
+    
+- name: Setting M2_HOME environment variable
+  lineinfile: >
+    dest={{ env_file_path }} 
+    regexp='^M2_HOME.*' 
+    line='M2_HOME={{ maven_home }}' 
+    insertbefore='^PATH.*'
+
+- name: Setting M2 environment variable
+  lineinfile: >
+    dest={{ env_file_path }} 
+    regexp='^M2=.*' 
+    line='M2={{ maven_home }}/bin' 
+    insertafter='^M2_HOME.*'  
+
+- name: Add Maven binaries to PATH environment variable
+  lineinfile: >
+    dest={{ env_file_path }} 
+    state=present 
+    backrefs=yes 
+    regexp='PATH=(["]*)((?!.*?{{ maven_home }}/bin).*?)(["]*)$' 
+    line="PATH=\1\2:{{ maven_home }}/bin\3"

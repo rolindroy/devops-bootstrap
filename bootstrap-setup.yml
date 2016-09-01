@@ -3,10 +3,10 @@
   hosts: bootstrap-server
   sudo: True
   
-  vars:
-    jenkins_admin_users:
-      - username: admin
-        password: admin@123
+  # vars:
+    # jenkins_admin_users:
+      # - username: admin
+        # password: admin@123
         
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
@@ -27,6 +27,8 @@
       java_packages:
         - openjdk-8-jdk
         
-    - role: mysql
+    # - role: mysql
+    
+    - role: maven
         
-    - role: jenkins
+    # - role: jenkins
