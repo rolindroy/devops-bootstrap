@@ -98,7 +98,7 @@ if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
     sudo cat $BT_KeyPath/$BT_Ssh_KeyName".pub" >> $BT_KeyPath/authorized_keys
 fi
 
-bootstrap_logger "Running ansible ping to all host."
+bootstrap_logger "Ensure ansible is installed and configured"
 ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
 
 bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. \e[0m"; 
