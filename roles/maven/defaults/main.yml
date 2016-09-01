@@ -10,3 +10,4 @@ maven_ln_dest_dir: /usr/bin/mvn
 
 maven_home: /usr/share/maven
 env_file_path: /etc/environment
+java_home: /usr/lib/jvm/java-8-openjdk-amd64
