@@ -27,8 +27,10 @@
       java_packages:
         - openjdk-8-jdk
         
-    # - role: mysql
+    - role: mysql
     
     - role: maven
+    
+    - role: sonar
         
-    # - role: jenkins
+    - role: jenkins
