@@ -64,7 +64,7 @@ bootstrap_logger()
 
 bootstrap_out()
 {
-	securityKey= `cat /var/lib/jenkins/secrets/initialAdminPassword`
+	securityKey= `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 	echo -e "\e[34mBootstrap:: bootstrap.sh
 ##########################################################
  DevOps Bootstrap script for Continuous Integration- 	
