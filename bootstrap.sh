@@ -64,25 +64,34 @@ bootstrap_logger()
 
 bootstrap_out()
 {
+	securityKey=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 	echo -e "\e[34mBootstrap:: bootstrap.sh
 ##########################################################
-## DevOps Bootstrap script for Continuous Integration- 	##
-## successfully completed. !				##
-##							##
-## Jenkins Server : 					##
-##	http://<Ip_address>:7070			##
-##	UserName : admin				##
-##	Password : admin@123				##
-## Sonar						##
-##	http://<Ip_address>:9000			##
-##	UserName : admin				##
-##	Password : admin				##
-##							##
-## @author Rolind Roy < hello@rolindroy.com >		##
+ DevOps Bootstrap script for Continuous Integration- 	
+ successfully completed. !				
+							
+ Jenkins Server : 					
+	http://$1:7070			
+	UserName : admin				
+	Password : admin@123				
+ Sonar					
+	http://$1:9000		
+	UserName : admin			
+	Password : admin			
+						
+ Please use the below security key to "Unlock Jenkins".
+
+ Security Key : \e[0m \e[32;1m $securityKey \e[0m \e[34m
+
+ --
+	@author Rolind Roy < hello@rolindroy.com >	
+ 
 ##########################################################
 	 \e[0m" $1 >&2;
 }
 
+bootstrap_logger "Getting Public Ip from dns server."
+bt_public_ip=`dig +short myip.opendns.com @resolver1.opendns.com` || bootstrap_handler $BT_Warning "Unable to find public IP"
 bootstrap_logger "Installing Curl"
 sudo apt-get -y install curl || bootstrap_handler $BT_Error "Unable to Install curl. Please fix the issue and try again." $BT_Die
 
@@ -114,4 +123,4 @@ mv ./roles/geerlingguy.mysql ./roles/mysql
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
 
-bootstrap_out
+bootstrap_out $bt_public_ip

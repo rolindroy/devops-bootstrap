@@ -20,6 +20,8 @@
       with_items:
         - curl
         - wget
+        - zip
+        - unzip
         
   roles:
     - role: java
