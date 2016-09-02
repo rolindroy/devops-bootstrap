@@ -1,3 +1,5 @@
 ---
 - name: restart sonar
   service: name=sonar state=restarted
+  register: start_failed
+  ignore_errors: True
