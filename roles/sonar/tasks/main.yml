@@ -55,6 +55,11 @@
 
 - name: Ensure Sonar is running and set to start on boot.
   service: name=sonar state=started enabled=yes
+  register: start_failed
+  ignore_errors: True
+  
+- name: Ensure Sonar is running and set to start on boot - retry
+  script: /usr/local/sonar/bin/linux-x86-64/sonar.sh start
 
 - name: Make sure Sonar is responding on the configured port.
   wait_for: port=9000 delay=3 timeout=300
