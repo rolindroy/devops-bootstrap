@@ -60,6 +60,7 @@
   
 - name: Ensure Sonar is running and set to start on boot - retry
   shell: sh /usr/local/sonar/bin/linux-x86-64/sonar.sh start
+  when: start_failed|failed
   ignore_errors: True
 
 - name: Make sure Sonar is responding on the configured port.
