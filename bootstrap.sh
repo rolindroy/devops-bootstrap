@@ -71,11 +71,11 @@ bootstrap_out()
  successfully completed. !				
 							
  Jenkins Server : 					
-	http://<Ip_address>:7070			
+	http://$1:7070			
 	UserName : admin				
 	Password : admin@123				
  Sonar					
-	http://<Ip_address>:9000		
+	http://$1:9000		
 	UserName : admin			
 	Password : admin			
 						
@@ -90,6 +90,8 @@ bootstrap_out()
 	 \e[0m" $1 >&2;
 }
 
+bootstrap_logger "Getting Public Ip from dns server."
+bt_public_ip=`dig +short myip.opendns.com @resolver1.opendns.com` || bootstrap_handler $BT_Warning "Unable to find public IP"
 bootstrap_logger "Installing Curl"
 sudo apt-get -y install curl || bootstrap_handler $BT_Error "Unable to Install curl. Please fix the issue and try again." $BT_Die
 
@@ -121,4 +123,4 @@ mv ./roles/geerlingguy.mysql ./roles/mysql
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
 
-bootstrap_out
+bootstrap_out $bt_public_ip
