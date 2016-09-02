@@ -81,7 +81,7 @@ bootstrap_out()
 						
  Please use the below security key to "Unlock Jenkins".
 
- Security Key : ${bold} $securityKey ${normal}
+ Security Key : \e[0m \e[32;1mbold $securityKey \e[0mplain \e[34m
 
  --
 	@author Rolind Roy < hello@rolindroy.com >	
