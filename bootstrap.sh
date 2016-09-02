@@ -64,21 +64,28 @@ bootstrap_logger()
 
 bootstrap_out()
 {
+	securityKey= `cat /var/lib/jenkins/secrets/initialAdminPassword`
 	echo -e "\e[34mBootstrap:: bootstrap.sh
 ##########################################################
-## DevOps Bootstrap script for Continuous Integration- 	##
-## successfully completed. !				##
-##							##
-## Jenkins Server : 					##
-##	http://<Ip_address>:7070			##
-##	UserName : admin				##
-##	Password : admin@123				##
-## Sonar						##
-##	http://<Ip_address>:9000			##
-##	UserName : admin				##
-##	Password : admin				##
-##							##
-## @author Rolind Roy < hello@rolindroy.com >		##
+ DevOps Bootstrap script for Continuous Integration- 	
+ successfully completed. !				
+							
+ Jenkins Server : 					
+	http://<Ip_address>:7070			
+	UserName : admin				
+	Password : admin@123				
+ Sonar					
+	http://<Ip_address>:9000		
+	UserName : admin			
+	Password : admin			
+						
+ Please use the below security key to "Unlock Jenkins".
+
+ Security Key : ${bold} $securityKey ${normal}
+
+ --
+	@author Rolind Roy < hello@rolindroy.com >	
+ 
 ##########################################################
 	 \e[0m" $1 >&2;
 }
