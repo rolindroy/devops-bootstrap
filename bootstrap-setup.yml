@@ -1,13 +1,20 @@
 ---
+
+#*******************************************************************************************************************
+#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
+#
+#This projects contains bash scripts and ansible playbooks, 
+#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
+#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
+#
+# ---   @author Rolind Roy < hello@rolindroy.com >
+#*******************************************************************************************************************
+
 - name: Continues Integration Server Configuration
   hosts: bootstrap-server
   sudo: True
   
-  # vars:
-    # jenkins_admin_users:
-      # - username: admin
-        # password: admin@123
-        
+  ## Installing all the dependencies for java and sonar
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'

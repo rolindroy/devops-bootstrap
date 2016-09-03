@@ -1,8 +1,13 @@
-#Default variables
-#
-# @Rolind Roy < hello@rolindroy.com >
-#----------------------------------------------------------------------------
 
+#*******************************************************************************************************************
+#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
+#
+#This projects contains bash scripts and ansible playbooks, 
+#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
+#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
+#
+# ---   @author Rolind Roy < hello@rolindroy.com >
+#*******************************************************************************************************************
 
 maven_repo_url: deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main
 maven_ln_src_dir: /usr/share/maven/bin/mvn
