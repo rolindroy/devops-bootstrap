@@ -9,9 +9,12 @@
 # Settings 
 - include: settings.yml
 
-# Installing Plugins
-- include: plugins.yml
-
 # Configure Jenkins job
 - include: configure-job.yml
+
+# Installing Plugins
+- include: plugins.yml
+  when:ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
+
+
 
