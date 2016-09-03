@@ -13,15 +13,10 @@
     dest: /usr/local/
     copy: no
     
-- name: Remove existing Sonar directory
-  file:
-    src: /usr/local/sonar
-    state: absent
-  ignore_errors: True
-    
 - name: Move Sonar into place.
   shell: >
     mv /usr/local/{{ sonar_version_directory }} /usr/local/sonar
+  ignore_errors: True
     
 - name: Create a database for Sonar.
   mysql_db:
