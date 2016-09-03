@@ -3,7 +3,7 @@
 
 - name: Create custom job directory.
   file:
-    path: {{ jenkins_job_dir_path }}{{ jenkins_job_name }}
+    path: {{ jenkins_job_dir_path }}/{{ jenkins_job_name }}
     state: directory
     owner: jenkins
     group: jenkins
@@ -12,7 +12,7 @@
 - name: Configure default jenkins job.
   template:
     src: config.xml
-    dest: {{ jenkins_job_dir_path }}{{ jenkins_job_name }}/config.xml
+    dest: {{ jenkins_job_dir_path }}/{{ jenkins_job_name }}/config.xml
     owner: jenkins
     group: jenkins
     mode: 0775
