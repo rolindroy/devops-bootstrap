@@ -12,3 +12,6 @@
 # Installing Plugins
 - include: plugins.yml
 
+# Configure Jenkins job
+- include: configure-job.yml
+
