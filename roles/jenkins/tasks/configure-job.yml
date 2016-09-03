@@ -1,0 +1,25 @@
+---
+#Configuring Jenkins default Job
+
+- name: Create custom job directory.
+  file:
+    path: {{ jenkins_job_dir_path }}{{ jenkins_job_name }}
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+
+- name: Configure default jenkins job.
+  template:
+    src: config.xml
+    dest: {{ jenkins_job_dir_path }}{{ jenkins_job_name }}/config.xml
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+  register: jenkins_job_created
+  
+
+- name: Reload configuration from disk
+  shell: >
+    java -jar {{ jenkins_jar_location }} -noKeyAuth -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix | default('') }} reload-configuration --username {{ jenkins_admin_username }} --password {{ jenkins_admin_password }}
+  ignore_errors: True
