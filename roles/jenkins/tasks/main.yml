@@ -14,4 +14,4 @@
 
 # Installing Plugins
 - include: plugins.yml
-  when:ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
