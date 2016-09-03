@@ -1,7 +1,7 @@
 # DevOps Bootstrap project for CI/CD
 This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process buid with Shell and Ansible.
 
-This project aims to cover entire process of DevOps Lifecycle of continues integration that starts from "checkout code" to "Deploy and release" with the help of ["DevOps Sample Java Project"](https://github.com/rolindroy/devops-ci-deployment) project. 
+This project aims to cover entire process of DevOps Lifecycle of continues integration that starts from "checkout code" to "Deploy and release" with the help of ["DevOps Sample Java Project"](https://github.com/rolindroy/devops-ci-deployment). 
 
 
 Currently the project support only Debian based environments. 
