@@ -17,7 +17,7 @@
   file:
     src: /usr/local/sonar
     state: absent
-    ignore_errors: True
+  ignore_errors: True
     
 - name: Move Sonar into place.
   shell: >
