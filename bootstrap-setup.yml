@@ -44,4 +44,4 @@
         
     - role: jenkins
     
-    - role: docker
+    # - role: docker
