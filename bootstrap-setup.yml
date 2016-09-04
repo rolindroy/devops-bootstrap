@@ -30,18 +30,29 @@
         - zip
         - unzip
         
-  roles:
-    - role: java
-      when: "ansible_os_family == 'Debian'"
-      java_packages:
-        - openjdk-8-jdk
+  # roles:
+    # - role: java
+      # when: "ansible_os_family == 'Debian'"
+      # java_packages:
+        # - openjdk-8-jdk
         
-    - role: mysql
+    # - role: mysql
     
-    - role: maven
+    # - role: maven
     
-    - role: sonar
+    # - role: sonar
         
-    - role: jenkins
+    # - role: jenkins
     
-    # - role: docker
+  tasks:
+    - name: Install Docker 
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - docker
+        - docker.io
+      ignore_errors: True
+      
+    - name: Update docker service to run without sudo
+      user: name=USERNAME groups=docker append=yes
+      sudo: true
+    
