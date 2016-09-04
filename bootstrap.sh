@@ -118,11 +118,7 @@ bootstrap_logger "Dowloading files to install and configure Mysql Database"
 ansible-galaxy install geerlingguy.mysql -p ./roles/
 mv ./roles/geerlingguy.mysql ./roles/mysql
 
-# bootstrap_logger "Dowloading files to install and configure Docker"
-# ansible-galaxy install angstwad.docker_ubuntu -p ./roles/
-# mv ./roles/angstwad.docker_ubuntu ./roles/docker
-
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
-ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
+ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
 bootstrap_out $bt_public_ip

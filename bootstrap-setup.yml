@@ -53,6 +53,9 @@
       ignore_errors: True
       
     - name: Update docker service to run without sudo
-      user: name=USERNAME groups=docker append=yes
+      user: name={{ item }} groups=docker append=yes
       sudo: true
+      with_items:
+        - "{{ ubuntu_user }}"
+        - jenkins
     
