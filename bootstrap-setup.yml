@@ -30,19 +30,19 @@
         - zip
         - unzip
         
-  # roles:
-    # - role: java
-      # when: "ansible_os_family == 'Debian'"
-      # java_packages:
-        # - openjdk-8-jdk
+  roles:
+    - role: java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
         
-    # - role: mysql
+    - role: mysql
     
-    # - role: maven
+    - role: maven
     
-    # - role: sonar
+    - role: sonar
         
-    # - role: jenkins
+    - role: jenkins
     
   tasks:
     - name: Install Docker 
@@ -61,7 +61,7 @@
       register: docker_group
     
     - name: Kill open ssh sessions
-      shell: "ps -ef | grep sshd | grep `whoami` | awk '{print \"kill -9\", $2}' | sh"
+      shell: "ps -ef | grep sshd | grep jenkins | awk '{print \"kill -9\", $2}' | sh"
       when: docker_group | changed
       failed_when: false
     
