@@ -1,9 +1,13 @@
-#Default variables
-#Ref:: https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
-#
-# @Rolind Roy < hello@rolindroy.com >
-#----------------------------------------------------------------------------
 
+#*******************************************************************************************************************
+#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
+#
+#This projects contains bash scripts and ansible playbooks, 
+#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
+#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
+#
+# ---   @author Rolind Roy < hello@rolindroy.com >
+#*******************************************************************************************************************
 
 jenkins_repo_url: deb http://pkg.jenkins.io/debian-stable binary/
 jenkins_repo_key: http://pkg.jenkins.io/debian/jenkins-ci.org.key
@@ -23,6 +27,9 @@ jenkins_init_changes:
   - {option: "JENKINS_ARGS", value: "--prefix={{ jenkins_url_prefix }}"}
   - {option: "JENKINS_JAVA_OPTIONS", value: "{{ jenkins_java_options }}"}
 
+jenkins_job_dir_path: /var/lib/jenkins/jobs
+jenkins_job_name: DevOps_Sample_Deployment_Project  
+  
 jenkins_plugins: []
 jenkins_update_plugins: true
 jenkins_install_recommended_plugins: true

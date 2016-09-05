@@ -12,10 +12,11 @@
     src: "{{ workspace }}/{{ sonar_version_directory }}.zip"
     dest: /usr/local/
     copy: no
-
+    
 - name: Move Sonar into place.
   shell: >
     mv /usr/local/{{ sonar_version_directory }} /usr/local/sonar
+  ignore_errors: True
     
 - name: Create a database for Sonar.
   mysql_db:

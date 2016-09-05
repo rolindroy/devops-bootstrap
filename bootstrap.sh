@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#*******************************************************************************************************************
+#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
+#
+#This projects contains bash scripts and ansible playbooks, 
+#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
+#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
+#
+# ---   @author Rolind Roy < hello@rolindroy.com >
+#*******************************************************************************************************************
+
 
 BT_Error=400
 BT_Warning=300
@@ -8,17 +18,6 @@ BT_Die=1
 
 BT_KeyPath=~/.ssh
 BT_Ssh_KeyName=bootstrap_id-rsa
-
-usage()
-{
-cat <<"USAGE"
-    Usage: bash bootstrap.sh            
-    --
-    @author Rolind Roy < hello@rolindroy.com >
-       
-USAGE
-exit 0
-}
 
 bootstrap_handler()
 {
@@ -66,9 +65,8 @@ bootstrap_out()
 {
 	securityKey=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 	echo -e "\e[34mBootstrap:: bootstrap.sh
-##########################################################
- DevOps Bootstrap script for Continuous Integration- 	
- successfully completed. !				
+********************************************************************************
+ DevOps Bootstrap script for Continuous Integration successfully completed.!				
 							
  Jenkins Server : 					
 	http://$1:7070			
@@ -86,8 +84,8 @@ bootstrap_out()
  --
 	@author Rolind Roy < hello@rolindroy.com >	
  
-##########################################################
-	 \e[0m" $1 >&2;
+********************************************************************************
+	 \e[0m" >&2;
 }
 
 bootstrap_logger "Getting Public Ip from dns server."
@@ -121,6 +119,6 @@ ansible-galaxy install geerlingguy.mysql -p ./roles/
 mv ./roles/geerlingguy.mysql ./roles/mysql
 
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
-ansible-playbook -i hosts bootstrap-setup.yml || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml" $BT_Die
+ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
 bootstrap_out $bt_public_ip
