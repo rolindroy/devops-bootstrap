@@ -31,7 +31,23 @@ Requires `git`, `curl`, `wget` to be installed on the server.
 ## How to execute
 
     - bash bootstrap.sh
-
+  `bootstrap.sh` is written in shell, this script will install and configure all the dependencies which needed to execute ansible  playbook `bootstrap-setup.yml` and It will invoke ansible playbook automatically.
+  
+  `bootstrap-setup.yml ` is ansible playbook which will install and configure “End-to-End CI/CD Life cycle”.
+  
+  Once the script is executed, will be able to access the server by using following credentials.
+   
+    - Jenkins Server : 					
+	      - http://<IP_Address>:7070			
+	      - UserName : admin				
+	      - Password : admin@123				
+    - Sonar					
+	      - http://<IP_Address>:9000		
+	      - UserName : admin			
+	      - Password : admin
+	      
+  Make sure that all the login process are completed. If you are not able to see the jenkins job in the server please reload configuration from disk.
+  
 ## License
 
 Unlicensed
