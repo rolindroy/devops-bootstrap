@@ -46,18 +46,18 @@
     line="PATH=\1\2:{{ maven_home }}/bin\3"
     
       
-- name: Setting JAVA_HOME environment variable
-  lineinfile: >
-    dest={{ env_file_path }} 
-    regexp='^JAVA_HOME.*' 
-    line='JAVA_HOME={{ java_home }}' 
-    insertbefore='^PATH.*'
+#- name: Setting JAVA_HOME environment variable
+#  lineinfile: >
+#    dest={{ env_file_path }} 
+#    regexp='^JAVA_HOME.*' 
+#    line='JAVA_HOME={{ java_home }}' 
+#   insertbefore='^PATH.*'
 
 - name: Setting JRE_HOME environment variable
   lineinfile: >
     dest={{ env_file_path }} 
     regexp='^JRE_HOME=.*' 
-    line='JRE_HOME={{ maven_home }}/jre' 
+    line='JRE_HOME={{ java_home }}/jre' 
     insertafter='^M2_HOME.*'  
 
 - name: Add Java binaries to PATH environment variable
