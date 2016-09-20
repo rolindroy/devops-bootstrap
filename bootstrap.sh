@@ -94,6 +94,8 @@ bootstrap_logger "Installing Curl"
 sudo apt-get -y install curl || bootstrap_handler $BT_Error "Unable to Install curl. Please fix the issue and try again." $BT_Die
 
 bootstrap_logger "Installing and configuring ansible on localhost"
+sudo apt-get -y install software-properties-common && sudo apt-add-repository ppa:ansible/ansible -y 
+sudo apt-get update
 sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
 sudo sed -i '1i localhost' /etc/ansible/hosts

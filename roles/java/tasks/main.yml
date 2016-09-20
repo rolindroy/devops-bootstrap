@@ -18,9 +18,9 @@
   when: ansible_os_family == 'Debian'
 
 # Environment setup.
-- name: Set JAVA_HOME if configured.
-  template:
-    src: java_home.sh.j2
-    dest: /etc/profile.d/java_home.sh
-    mode: 0644
-  when: java_home
+# - name: Set JAVA_HOME if configured.
+  # template:
+    # src: java_home.sh.j2
+    # dest: /etc/profile.d/java_home.sh
+    # mode: 0644
+  # when: java_home
