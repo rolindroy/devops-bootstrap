@@ -47,11 +47,11 @@
     
       
 - name: Setting JAVA_HOME environment variable
- lineinfile: >
+  lineinfile: >
    dest={{ env_file_path }} 
    regexp='^JAVA_HOME.*' 
    line='JAVA_HOME={{ java_home }}' 
-  insertbefore='^PATH.*'
+   insertbefore='^PATH.*'
 
 - name: Setting JRE_HOME environment variable
   lineinfile: >
