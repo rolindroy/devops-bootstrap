@@ -15,7 +15,6 @@ It will install and configure the following on an Ubuntu (14.04/16.04)
   - Apache Maven
   - SonarQube
   - Mysql
-  - Nexus
 
 
 ## Requirements
@@ -38,9 +37,7 @@ Requires `git`, `curl`, `wget` to be installed on the server.
   Once the script is executed, will be able to access the server by using following credentials.
    
     - Jenkins Server : 					
-	      - http://<IP_Address>:7070			
-	      - UserName : admin				
-	      - Password : admin@123				
+	      - http://<IP_Address>:7070							
     - Sonar					
 	      - http://<IP_Address>:9000		
 	      - UserName : admin			
