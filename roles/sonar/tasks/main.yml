@@ -19,7 +19,7 @@
   ignore_errors: True
     
 - name: Stoping Sonar.
-  service: name=sonar state=stop enabled=yes
+  service: name=sonar state=stopped enabled=yes
   register: stop_failed
   ignore_errors: True
   
