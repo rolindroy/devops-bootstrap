@@ -56,6 +56,8 @@
   #notify: restart sonar
   with_items:
     - regexp: "^sonar.jdbc.username"
+      line: "#sonar.jdbc.username={{ sonar_mysql_username }}"
+    - regexp: "^sonar.jdbc.username"
       line: "sonar.jdbc.username={{ sonar_mysql_username }}"
     - regexp: "^sonar.jdbc.password"
       line: "sonar.jdbc.password={{ sonar_mysql_password }}"
