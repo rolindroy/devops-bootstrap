@@ -90,4 +90,5 @@
   ignore_errors: True
 
 - name: Make sure Sonar is responding on the configured port.
-  wait_for: port=9000 delay=3 timeout=300
+  wait_for: port=9000 delay=3 timeout=60
+  ignore_errors: True
