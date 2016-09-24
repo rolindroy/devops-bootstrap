@@ -29,6 +29,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.0">
   <triggers>
     <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.21.1">
       <spec></spec>
@@ -62,7 +63,7 @@ else
         echo &quot;No old containers to remove.&quot;
 fi
 docker run -dit -p 8080:8080 --name=&quot;devops_counterapp&quot; devops_bootstrap/counterapp
-echo &quot;http://IP:8080/CounterWebApp/&quot;
+sh output.sh
 </command>
     </hudson.tasks.Shell>
   </builders>
