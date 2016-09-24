@@ -57,4 +57,7 @@ Unlicensed
 
 ## Author Information
 
-This project was created in 2016 by [Rolind Roy](http://rolindroy.com) | hello@rolindroy.com
+This project was created in 2016 by 
+	[Rolind Roy](http://rolindroy.com) ,
+	[Naresh Babu](https://github.com/narezchand) and
+	[Shifa Mariam](https://github.com/shifamariam) 
