@@ -45,10 +45,19 @@ Requires `git`, `curl`, `wget` to be installed on the server.
 	      
   Make sure that all the login process are completed. If you are not able to see the jenkins job in the server please reload configuration from disk.
   
+  ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/reload.jpg)
+  
+  once the configuration is reloaded, You could able to see the sample job here.
+  
+  ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/job.png)
+  
 ## License
 
 Unlicensed
 
 ## Author Information
 
-This project was created in 2016 by [Rolind Roy](http://rolindroy.com) | hello@rolindroy.com
+This project was created in 2016 by 
+	[Rolind Roy](http://rolindroy.com) ,
+	[Naresh Babu](https://github.com/narezchand) and
+	[Shifa Mariam](https://github.com/shifamariam) 
