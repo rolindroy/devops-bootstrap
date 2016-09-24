@@ -62,6 +62,7 @@ else
         echo &quot;No old containers to remove.&quot;
 fi
 docker run -dit -p 8080:8080 --name=&quot;devops_counterapp&quot; devops_bootstrap/counterapp
+echo &quot;http://IP:8080/CounterWebApp/&quot;
 </command>
     </hudson.tasks.Shell>
   </builders>
