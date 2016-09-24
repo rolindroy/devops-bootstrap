@@ -80,15 +80,13 @@ bootstrap_out()
  1. Please use the below security key to "Unlock Jenkins".
 
 	Security Key : \e[0m \e[32;1m $securityKey \e[0m \e[34m
-	
  2. Reload Configuration from Disk.
  3. Please restart jenkins server\e[0m \e[32;1monly\e[0m \e[34mafter successfully logged in to the console.
  
 	\e[0m \e[32;1m sudo service jenkins restart \e[0m \e[34m
- 
  4. (Optional) If sonar isn\’t start automatically, Please use below command to start sonar console.
  
-	\e[0m \e[32;1m sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console \e[0m \e[34m
+	\e[0m \e[32;1m sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 & \e[0m \e[34m
  --
 	@author Rolind Roy < hello@rolindroy.com >	
  
