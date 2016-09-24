@@ -31,7 +31,6 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.21.1">
-    <configVersion>2</configVersion>
       <spec></spec>
     </com.cloudbees.jenkins.GitHubPushTrigger>
   </triggers>
@@ -54,7 +53,7 @@ fi</command>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 #Deploying war package inside docker container
-sudo mv CounterWebApp/target/CounterWebApp.war .
+mv CounterWebApp/target/CounterWebApp.war .
 docker build -t devops_bootstrap/counterapp .
 if [ $(docker ps -a -q -f name=&quot;devops_counterapp&quot;) ]; then
         echo &quot;Removing old containers...&quot;
@@ -62,7 +61,7 @@ if [ $(docker ps -a -q -f name=&quot;devops_counterapp&quot;) ]; then
 else
         echo &quot;No old containers to remove.&quot;
 fi
-docker run -dit -p 8080:8080 -name=&quot;devops_counterapp&quot; bootstrap/counterapp
+docker run -dit -p 8080:8080 --name=&quot;devops_counterapp&quot; devops_bootstrap/counterapp
 </command>
     </hudson.tasks.Shell>
   </builders>
