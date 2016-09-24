@@ -118,4 +118,5 @@ bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. 
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
+sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 & || bootstrap_handler $BT_Warning "sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &" 
 bootstrap_out $bt_public_ip
