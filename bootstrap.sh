@@ -70,8 +70,7 @@ bootstrap_out()
 							
  Jenkins Server : 					
 	http://$1:7070			
-	UserName : admin				
-	Password : admin@123				
+				
  Sonar					
 	http://$1:9000		
 	UserName : admin			
@@ -80,6 +79,10 @@ bootstrap_out()
  Please use the below security key to "Unlock Jenkins".
 
  Security Key : \e[0m \e[32;1m $securityKey \e[0m \e[34m
+ 
+ If sonar isn\’t start automatically, Please use below command to start sonar console.
+ 
+ \e[0m \e[32;1m sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console \e[0m \e[34m
 
  --
 	@author Rolind Roy < hello@rolindroy.com >	
