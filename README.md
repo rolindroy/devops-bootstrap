@@ -45,11 +45,18 @@ Requires `git`, `curl`, `wget` to be installed on the server.
 	      
   Make sure that all the login process are completed. If you are not able to see the jenkins job in the server please reload configuration from disk.
   
+  Step 1: Restart jenkins from terminal `sudo service jenkins restart`
+  
+  Step 2: Reload configuration from disk.
+  
   ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/reload.jpg)
   
   once the configuration is reloaded, You could able to see the sample job here.
   
   ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/job.png)
+  
+  Once the build is successful, You can access the web application `http://<IP_Address>:8080/CounterWebApp/`
+  
   
 ## License
 
