@@ -80,10 +80,15 @@ bootstrap_out()
 
  Security Key : \e[0m \e[32;1m $securityKey \e[0m \e[34m
  
+ Please restart jenkins server \e[0m \e[32;1m only \e[0m \e[34m after successfully loged in to the console.
+ 
+ \e[0m \e[32;1m sudo service jenkins restart \e[0m \e[34m
+ 
+ 
  If sonar isn\’t start automatically, Please use below command to start sonar console.
  
  \e[0m \e[32;1m sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console \e[0m \e[34m
-
+ 
  --
 	@author Rolind Roy < hello@rolindroy.com >	
  
@@ -121,7 +126,5 @@ ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_curr
 sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 & 
 
 bootstrap_logger "Waiting to run sonar console. It may take a while... Please wait. " && sleep 30s
-
-sudo service jenkins restart
 
 bootstrap_out $bt_public_ip
