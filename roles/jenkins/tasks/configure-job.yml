@@ -17,5 +17,5 @@
     group: jenkins
     mode: 0775
   register: jenkins_job_created
-  notify: restart_jenkins
+
  

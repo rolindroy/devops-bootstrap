@@ -6,12 +6,5 @@
 # Configuring Jenkins Server
 - include: configure-jenkins.yml
 
-# Settings 
-# - include: settings.yml
-
 # Configure Jenkins job
 - include: configure-job.yml
-
-# Installing Plugins
-# - include: plugins.yml
-  # when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
