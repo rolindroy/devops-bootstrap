@@ -6,6 +6,10 @@
     regexp: '^HTTP_PORT='
     line: 'HTTP_PORT={{ jenkins_http_port }}'
   register: jenkins_http_port_fix 
+
+- name: Immediately restart Jenkins on init config changes.
+  shell: service jenkins restart
+  ignore_errors: True
   
 - name: Configure jenkins server.
   template:
@@ -15,7 +19,7 @@
     group: jenkins
     mode: 0644
 
-- name: Immediately restart Jenkins on init config changes.
+- name: Immediately restart Jenkins on server config changes.
   shell: service jenkins restart
   ignore_errors: True
 
