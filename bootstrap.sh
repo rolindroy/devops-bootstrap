@@ -125,4 +125,6 @@ sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &
 
 bootstrap_logger "Waiting to run sonar console. It may take a while... Please wait. " && sleep 30s
 
+sudo service jenkins restart
+
 bootstrap_out $bt_public_ip
