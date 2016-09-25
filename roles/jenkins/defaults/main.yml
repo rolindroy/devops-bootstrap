@@ -12,8 +12,14 @@
 jenkins_repo_url: deb http://pkg.jenkins.io/debian-stable binary/
 jenkins_repo_key: http://pkg.jenkins.io/debian/jenkins-ci.org.key
 jenkins_home_path: /var/lib/jenkins
+jenkins_conf_file: /var/lib/jenkins/config.xml
 jenkins_init_file: /etc/default/jenkins
 jenkins_http_port: 7070
 
 jenkins_job_dir_path: /var/lib/jenkins/jobs
-jenkins_job_name: DevOps_Sample_Deployment_Project  
+jenkins_job_name: DevOps_Sample_Deployment_Project
+
+workspace: /tmp
+jenkins_plugin_dir_path: /var/lib/jenkins/jobs
+jenkins_plugin_download_url: "https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/plugins/plugin.zip"
+plugin_file_name: "plugins"
