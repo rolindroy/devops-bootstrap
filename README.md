@@ -55,7 +55,12 @@ Requires `git`, `curl`, `wget` to be installed on the server.
   
   ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/job.png)
   
-  Once the build is successful, You can access the web application `http://<IP_Address>:8080/CounterWebApp/`
+  Once the build is successful, You are able to access the web application using following url
+  	
+	- http://<IP_Address>:8080/CounterWebApp/
+	
+  ![alt tag](https://raw.githubusercontent.com/rolindroy/devops-bootstrap/master/ImageContent/tomcat.png)
+
   
   
 ## License
@@ -68,3 +73,5 @@ This project was created in 2016 by
 	[Rolind Roy](http://rolindroy.com) ,
 	[Naresh Babu](https://github.com/narezchand) and
 	[Shifa Mariam](https://github.com/shifamariam) 
+	
+Thank You for using this Project.
