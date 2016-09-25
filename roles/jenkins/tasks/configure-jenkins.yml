@@ -7,12 +7,13 @@
     line: 'HTTP_PORT={{ jenkins_http_port }}'
   register: jenkins_http_port_fix 
   
-  #<useSecurity>false</useSecurity>
-- name: Updating Jenkins config file.
-  lineinfile:
-    dest: "{{ jenkins_conf_file }}"
-    regexp: '^<useSecurity>'
-    line: '<useSecurity>false</useSecurity>'
+- name: Configure jenkins server.
+  template:
+    src: jenkins_config.xml
+    dest: "{{ jenkins_home_path }}/config.xml"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
 
 - name: Immediately restart Jenkins on init config changes.
   service: name=jenkins state=restarted
