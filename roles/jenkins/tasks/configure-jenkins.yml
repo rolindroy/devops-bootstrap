@@ -16,8 +16,8 @@
     mode: 0644
 
 - name: Immediately restart Jenkins on init config changes.
-  service: name=jenkins state=restarted
-  when: jenkins_http_port_fix.changed
+  shell: service jenkins restart
+  ignore_errors: True
 
 - name: Download Plugins.
   get_url:
