@@ -79,3 +79,6 @@
       file:
         path: "/home/{{ ubuntu_user }}/jenkins-slave"
         state: directory
+        owner: {{ ubuntu_user }}
+        group: {{ ubuntu_user }}
+        mode: 0775
