@@ -104,12 +104,14 @@ sudo apt-get -y install software-properties-common && sudo apt-add-repository pp
 sudo apt-get update
 sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
+BT_current_user=`whoami`
+
 ## Jenkins Slave Machine Host setup here *********
 
 printf "Please provide slave machine host address : "
 read -r slave_host
 
-printf "Please provide the path of the key to authenticate slave machine (~/.ssh/id_rsa) : "
+printf "Please provide the path of the key to authenticate slave machine (/home/$BT_current_user/.ssh/id_rsa) : "
 read -r slave_path
 
 sudo sed -i 's/{SLAVE_HOST}/'$slave_host'/g' hosts
@@ -120,7 +122,6 @@ cp $slave_path ./roles/jenkins/templates/id_rsa
 ## Slave Machine setup end here *******
 
 sudo sed -i '1i localhost' /etc/ansible/hosts
-BT_current_user=`whoami`
 bootstrap_logger "Current working user : $BT_current_user"
 if [ ! -f $BT_KeyPath/$BT_Ssh_KeyName ]; then
     bootstrap_logger "Creating ssh pair."
@@ -134,7 +135,7 @@ ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handl
 bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. \e[0m";
 
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
-ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
+ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" --extra-vars "slave_host=$slave_host" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
 sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &
 

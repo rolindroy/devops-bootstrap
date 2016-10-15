@@ -45,8 +45,8 @@
 
     - role: jenkins
       vars:
-        slave_user: {{ ubuntu_user }}
-        slave-host: {{ slave-host }}
+        slave_user: "{{ ubuntu_user }}"
+        slave-host: "{{ slave-host }}"
       when: inventory_hostname in groups['bootstrap-server']
 
   tasks:
