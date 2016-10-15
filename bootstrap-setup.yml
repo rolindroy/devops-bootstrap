@@ -44,6 +44,9 @@
     - role: sonar
 
     - role: jenkins
+      vars:
+        slave_user: {{ ubuntu_user }}
+        slave-host: {{ slave-host }}
       when: inventory_hostname in groups['bootstrap-server']
 
   tasks:
@@ -69,3 +72,9 @@
 
     - name: Updating apt-cache
       apt: update_cache=yes
+
+    - name: Create Slave directory
+      file:
+        path: "/home/{{ ubuntu_user }}/jenkins-slave"
+        state: directory
+      when: inventory_hostname in groups['bootstrap-slave']

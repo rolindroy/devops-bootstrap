@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>slave</name>
+  <description>CI/CD Jenkins slave node</description>
+  <remoteFS>/home/{{ slave_user }}/jenkins-slave</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.11">
+    <host>{{ slave_host }}</host>
+    <port>22</port>
+    <credentialsId>63ad5e61-aab6-4561-8650-dea5d7443d72</credentialsId>
+    <maxNumRetries>0</maxNumRetries>
+    <retryWaitTime>0</retryWaitTime>
+  </launcher>
+  <label>Slave</label>
+  <nodeProperties/>
+</slave>

@@ -1,0 +1,35 @@
+---
+
+---
+#Configuring Jenkins slave node
+
+- name: Create custom node directory.
+  file:
+    path: "{{ jenkins_node_dir_path }}/{{ jenkins_node_name }}"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+
+- name: Configure slave node.
+  template:
+    src: config-node.xml
+    dest: "{{ jenkins_node_dir_path }}/{{ jenkins_node_name }}/config.xml"
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+  register: jenkins_node_created
+
+- name: Configure credentials
+  template:
+    src: credentials.xml
+    dest: "{{ jenkins_home_path }}/credentials.xml"
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+
+
+
+
+
+credentials.xml
