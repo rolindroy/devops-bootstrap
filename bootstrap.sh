@@ -139,12 +139,13 @@ bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. 
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" --extra-vars "slave_host=$slave_host" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
+##-----------------------------------------------------------------------------
 sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &
-
 sudo service jenkins restart > /dev/null
 bootstrap_logger "Waiting to run sonar console. It may take a while... Please wait. " && sleep 30s
-
+ssh -i /home/$BT_current_user/.ssh/id_rsa $BT_current_user@$slave_host 'sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &'
 sudo sed -i 's|<useSecurity>true</useSecurity>|<useSecurity>false</useSecurity>|g' /var/lib/jenkins/config.xml
 sudo service jenkins restart
+##-----------------------------------------------------------------------------
 
 bootstrap_out $bt_public_ip
