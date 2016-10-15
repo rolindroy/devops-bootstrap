@@ -28,5 +28,5 @@ plugin_file_name: "plugins"
 jenkins_node_dir_path: /var/lib/jenkins/nodes
 jenkins_node_name: slave
 
-slave_user: rolindroy
+slave_user: rolind_roy
 slave_host: 104.197.232.14

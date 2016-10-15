@@ -11,7 +11,7 @@
 #*******************************************************************************************************************
 
 - name: Continues Integration Server Configuration
-  hosts: all
+  hosts: bootstrap
   sudo: True
 
   ## Installing all the dependencies for java and sonar
@@ -38,14 +38,19 @@
         - openjdk-8-jdk
 
     - role: mysql
+      hosts: !bastion-server
 
     - role: maven
+      hosts: !bastion-server
 
     - role: sonar
+      hosts: !bastion-server
 
     - role: jenkins
-      hosts: bootstrap-server
+      hosts: !bootstrap-slave
 
+- name: Installing Docker
+  hosts: !bastion-server
   tasks:
     - name: Install Docker
       apt: pkg={{ item }} state=latest

@@ -1,5 +1,4 @@
-[bootstrap-server]
-bootstrap-server ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/bootstrap_id-rsa
 
-[bootstrap-slave]
+[bootstrap]
+bootstrap-server ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/bootstrap_id-rsa
 bootstrap-slave ansible_ssh_host={SLAVE_HOST} ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/id_rsa
