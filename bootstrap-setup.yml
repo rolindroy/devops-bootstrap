@@ -41,11 +41,6 @@
     - role: maven
     - role: sonar
 
-- name: Installing and configuring CI Server
-  hosts: bastion-server
-  roles:
-    role: jenkins
-
 - name: Docker
   hosts: bastion-slave
   tasks:
