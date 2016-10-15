@@ -36,6 +36,7 @@
 
 - name: Installing and configuring application for java build
   hosts: slave
+  sudo: True
   roles:
     - role: mysql
     - role: maven
@@ -43,11 +44,13 @@
 
 - name: Installing and configuring ci-cd
   hosts: server
+  sudo: True
   roles:
     - role: jenkins
 
 - name: Docker
   hosts: slave
+  sudo: True
   tasks:
     - name: Install Docker
       apt: pkg={{ item }} state=latest
