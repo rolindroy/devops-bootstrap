@@ -45,9 +45,6 @@
 
     - role: jenkins
       hosts: bootstrap-server
-      vars:
-        - slave_user: "{{ slave_user }}"
-        - slave_host: "{{ slave_host }}"
 
   tasks:
     - name: Install Docker
