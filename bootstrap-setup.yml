@@ -49,9 +49,9 @@
 - name: Running Role for Jenkins
   hosts: bootstrap-server
   roles: jenkins
-    vars:
-      - slave_user: "{{ ubuntu_user }}"
-      - slave-host: "{{ slave-host }}"
+  vars:
+    - slave_user: "{{ ubuntu_user }}"
+    - slave-host: "{{ slave-host }}"
 
   tasks:
     - name: Install Docker
