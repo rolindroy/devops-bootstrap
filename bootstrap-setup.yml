@@ -43,11 +43,12 @@
 
     - role: sonar
 
-    - role: jenkins
-      vars:
-        slave_user: "{{ ubuntu_user }}"
-        slave-host: "{{ slave-host }}"
-      when: inventory_hostname in groups['bootstrap-server']
+- name: Installing and configuring Jenkins
+  roles: jenkins
+  vars:
+    slave_user: "{{ ubuntu_user }}"
+    slave-host: "{{ slave-host }}"
+  when: inventory_hostname in groups['bootstrap-server']
 
   tasks:
     - name: Install Docker

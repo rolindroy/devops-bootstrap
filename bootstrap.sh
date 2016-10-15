@@ -115,7 +115,9 @@ printf "Please provide the path of the key to authenticate slave machine (/home/
 read -r slave_path
 
 sudo sed -i 's/{SLAVE_HOST}/'$slave_host'/g' hosts
+
 sudo sed -i 's/{KEY_PATH}/'$slave_path'/g' hosts
+
 sudo chmod 400 $slave_path
 cp $slave_path ./roles/jenkins/templates/id_rsa
 
