@@ -25,9 +25,3 @@
     owner: jenkins
     group: jenkins
     mode: 0775
-
-
-
-
-
-credentials.xml
