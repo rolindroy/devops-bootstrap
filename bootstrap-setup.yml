@@ -43,10 +43,6 @@
 
     - role: sonar
 
-- name: Installing and configuring Jenkins
-  hosts: bootstrap-server
-  roles: jenkins
-
   tasks:
     - name: Install Docker
       apt: pkg={{ item }} state=latest
@@ -76,3 +72,10 @@
       file:
         path: "/home/{{ ubuntu_user }}/jenkins-slave"
         state: directory
+
+- name: Installing and configuring Jenkins
+  hosts: bootstrap-server
+  roles: jenkins
+  vars:
+    - slave_user: "{{ ubuntu_user }}"
+    - slave_host: "{{ slave_host }}"
