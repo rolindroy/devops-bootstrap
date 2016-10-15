@@ -25,3 +25,19 @@
     owner: jenkins
     group: jenkins
     mode: 0775
+
+- name: Create .ssh Directory
+  file:
+    path: "{{ jenkins_home_path }}/.ssh"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: 0775
+
+- name: copy slave ssh identity to .ssh directory
+  template:
+    src: id_rsa
+    dest: "{{ jenkins_home_path }}/.ssh/id_rsa"
+    owner: jenkins
+    group: jenkins
+    mode: 0400
