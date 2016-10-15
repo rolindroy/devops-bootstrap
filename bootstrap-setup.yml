@@ -13,6 +13,8 @@
 - name: Continues Integration Server Configuration
   hosts: all
   sudo: True
+
+  ## Installing all the dependencies for java and sonar
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
@@ -29,27 +31,22 @@
         - unzip
         - git
 
-- name: Running Role Java
-  roles: java
-  when: "ansible_os_family == 'Debian'"
-  java_packages:
-    - openjdk-8-jdk
+  roles:
+    - role: java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
 
-- name: Running Role Mysql
-  roles: mysql
+    - role: mysql
 
-- name: Running Role Maven
-  roles: maven
+    - role: maven
 
-- name: Running Role Sonar
-  roles: sonar
+    - role: sonar
 
-- name: Running Role for Jenkins
-  hosts: bootstrap-server
-  roles: jenkins
-  vars:
-    - slave_user: "{{ ubuntu_user }}"
-    - slave-host: "{{ slave-host }}"
+    - role: jenkins
+      vars:
+        - slave_user: "{{ slave_user }}"
+        - slave_host: "{{ slave_host }}"
 
   tasks:
     - name: Install Docker
