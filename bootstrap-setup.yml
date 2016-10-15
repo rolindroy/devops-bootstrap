@@ -35,7 +35,7 @@
         - openjdk-8-jdk
 
 - name: Installing and configuring application for java build
-  hosts: bastion-slave
+  hosts: slave
   roles:
     - role: mysql
     - role: maven
