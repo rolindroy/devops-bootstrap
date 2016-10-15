@@ -72,4 +72,5 @@
 
 - name: Installing and configuring CI Server
   hosts: bastion-server
-  roles: jenkins
+  roles:
+    role: jenkins
