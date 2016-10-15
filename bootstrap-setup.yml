@@ -74,7 +74,6 @@
       apt: update_cache=yes
 
     - name: Create Slave directory
-      hosts: bootstrap-slave
       file:
         path: "/home/{{ ubuntu_user }}/jenkins-slave"
         state: directory
