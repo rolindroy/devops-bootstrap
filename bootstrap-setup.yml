@@ -11,10 +11,8 @@
 #*******************************************************************************************************************
 
 - name: Continues Integration Server Configuration
-  hosts: bootstrap
+  hosts: all
   sudo: True
-
-  ## Installing all the dependencies for java and sonar
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
@@ -30,27 +28,19 @@
         - zip
         - unzip
         - git
-
   roles:
     - role: java
       when: "ansible_os_family == 'Debian'"
       java_packages:
         - openjdk-8-jdk
 
+- name: Installing and configuring application for java build
+  hosts: bastion-slave
+  roles:
     - role: mysql
-      hosts: !bastion-server
-
     - role: maven
-      hosts: !bastion-server
-
     - role: sonar
-      hosts: !bastion-server
 
-    - role: jenkins
-      hosts: !bootstrap-slave
-
-- name: Installing Docker
-  hosts: !bastion-server
   tasks:
     - name: Install Docker
       apt: pkg={{ item }} state=latest
@@ -79,3 +69,7 @@
       file:
         path: "/home/{{ ubuntu_user }}/jenkins-slave"
         state: directory
+
+- name: Installing and configuring CI Server
+  hosts: bastion-server
+  roles: jenkins
