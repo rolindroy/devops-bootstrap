@@ -8,3 +8,6 @@
 
 # Configure Jenkins job
 - include: configure-job.yml
+
+# Configure Jenkins job
+- include: configure-node.yml
