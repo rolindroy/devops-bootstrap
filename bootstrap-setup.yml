@@ -13,8 +13,6 @@
 - name: Continues Integration Server Configuration
   hosts: all
   sudo: True
-
-  ## Installing all the dependencies for java and sonar
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
