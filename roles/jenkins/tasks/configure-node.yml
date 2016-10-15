@@ -1,6 +1,4 @@
 ---
-
----
 #Configuring Jenkins slave node
 
 - name: Create custom node directory.
