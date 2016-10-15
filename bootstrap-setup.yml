@@ -42,12 +42,12 @@
     - role: sonar
 
 - name: Installing and configuring ci-cd
-  hosts: bastion-server
+  hosts: server
   roles:
     - role: jenkins
 
 - name: Docker
-  hosts: bastion-slave
+  hosts: slave
   tasks:
     - name: Install Docker
       apt: pkg={{ item }} state=latest
