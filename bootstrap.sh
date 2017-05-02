@@ -1,14 +1,8 @@
 #!/bin/bash
 
-#*******************************************************************************************************************
-#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
-#
-#This projects contains bash scripts and ansible playbooks, 
-#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
-#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
-#
+#**************************************************
 # ---   @author Rolind Roy < hello@rolindroy.com >
-#*******************************************************************************************************************
+#**************************************************
 
 
 BT_Error=400
@@ -22,18 +16,18 @@ BT_Ssh_KeyName=bootstrap_id-rsa
 bootstrap_handler()
 {
 	#$1 = Mode // Error | Warning | Ok
-	#$2 = Message 
+	#$2 = Message
 	#$3 = Die // 1 => Exit
 
-	if [ $1 == $BT_OK ]; then 
-		bootstrap_ok 
-	elif [ $1 == $BT_Warning ]; then 
-		bootstrap_warning 
-	else 
-		bootstrap_error 
+	if [ $1 == $BT_OK ]; then
+		bootstrap_ok
+	elif [ $1 == $BT_Warning ]; then
+		bootstrap_warning
+	else
+		bootstrap_error
 	fi
-	
-	echo  -e "\t $2" 
+
+	echo  -e "\t $2"
 
 	if [[ $3 -eq 1 ]]; then
 		echo -e "bootstrap.sh exit with unkown error. exit 0"
@@ -66,30 +60,30 @@ bootstrap_out()
 	securityKey=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 	echo -e "\e[34mBootstrap:: bootstrap.sh
 ********************************************************************************
- DevOps Bootstrap script for Continuous Integration successfully completed.!				
-							
- Jenkins Server : 					
-	http://$1:7070						
- Sonar					
-	http://$1:9000		
-	UserName : admin			
+ DevOps Bootstrap script for Continuous Integration successfully completed.!
+
+ Jenkins Server :
+	http://$1:7070
+ Sonar
+	http://$1:9000
+	UserName : admin
 	Password : admin
- Tomcat Server (Only after the build)	
+ Tomcat Server (Only after the build)
 	http://$1:8080/CounterWebApp/
-						
+
  1. Please use the below security key to "Unlock Jenkins".
 
 	Security Key : \e[0m \e[32;1m $securityKey \e[0m \e[34m
  2. Reload Configuration from Disk.
  3. Please restart jenkins server\e[0m \e[32;1monly\e[0m \e[34mafter successfully logged in to the console.
- 
+
 	\e[0m \e[32;1m sudo service jenkins restart \e[0m \e[34m
  4. (Optional) If sonar isn\’t start automatically, Please use below command to start sonar console.
- 
+
 	\e[0m \e[32;1m sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 & \e[0m \e[34m
  --
-	@author Rolind Roy < hello@rolindroy.com >	
- 
+	@author Rolind Roy < hello@rolindroy.com >
+
 ********************************************************************************
 	 \e[0m" >&2;
 }
@@ -100,7 +94,7 @@ bootstrap_logger "Installing Curl"
 sudo apt-get -y install curl || bootstrap_handler $BT_Error "Unable to Install curl. Please fix the issue and try again." $BT_Die
 
 bootstrap_logger "Installing and configuring ansible on localhost"
-sudo apt-get -y install software-properties-common && sudo apt-add-repository ppa:ansible/ansible -y 
+sudo apt-get -y install software-properties-common && sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update
 sudo apt-get -y install ansible || bootstrap_handler $BT_Error "Unable to Install ansible. Please fix the issue and try again." $BT_Die
 
@@ -116,12 +110,12 @@ fi
 bootstrap_logger "Ensure ansible is installed and configured"
 ansible all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName || bootstrap_handler $BT_Error "ansible -vvvv all -m ping --private-key=$BT_KeyPath/$BT_Ssh_KeyName" $BT_Die
 
-bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. \e[0m"; 
+bootstrap_handler $BT_OK "\e[32m Ansible successfully installed and configured. \e[0m";
 
 bootstrap_logger "Running ansible-playbook bootstrap-setup.yml"
 ansible-playbook -i hosts bootstrap-setup.yml --extra-vars "ubuntu_user=$BT_current_user" || bootstrap_handler $BT_Error "Execute ansible-playbook -vvvv -i hosts bootstrap-setup.yml --extra-vars \"ubuntu_user=$BT_current_user\"" $BT_Die
 
-sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 & 
+sudo sh /usr/local/sonar/bin/linux-x86-64/sonar.sh console > /dev/null 2>&1 &
 
 sudo service jenkins restart > /dev/null
 bootstrap_logger "Waiting to run sonar console. It may take a while... Please wait. " && sleep 30s

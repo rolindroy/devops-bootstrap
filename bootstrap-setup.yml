@@ -1,27 +1,21 @@
 ---
 
-#*******************************************************************************************************************
-#This is the Bootstrap project for setting up end-to-end DevOps CI/CD Integration process written by Rolind Roy.
-#
-#This projects contains bash scripts and ansible playbooks, 
-#Docker that can be execute in any Debian based platform such as Ubuntu (14.04, 16.04). 
-#It can be integrated "end-to-end" CI/CD Process that starts from setting up environments to Deployed on Web server.  
-#
+#**************************************************
 # ---   @author Rolind Roy < hello@rolindroy.com >
-#*******************************************************************************************************************
+#**************************************************
 
 - name: Continues Integration Server Configuration
   hosts: bootstrap-server
   sudo: True
-  
+
   ## Installing all the dependencies for java and sonar
   pre_tasks:
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
-      
+
     - name: Updating apt-cache for Java Open JDK 8.
       apt: update_cache=yes
-      
+
     - name: Installing Curl and wget
       apt: pkg={{ item }} state=latest
       with_items:
@@ -29,29 +23,29 @@
         - wget
         - zip
         - unzip
-        
+
   roles:
     - role: java
       when: "ansible_os_family == 'Debian'"
       java_packages:
         - openjdk-8-jdk
-        
+
     - role: mysql
-    
+
     - role: maven
-    
+
     - role: sonar
-        
+
     - role: jenkins
-    
+
   tasks:
-    - name: Install Docker 
+    - name: Install Docker
       apt: pkg={{ item }} state=latest
       with_items:
         - docker
         - docker.io
       ignore_errors: True
-      
+
     - name: Update docker service to run without sudo
       user: name={{ item }} groups=docker append=yes
       sudo: true
@@ -59,12 +53,11 @@
         - "{{ ubuntu_user }}"
         - jenkins
       register: docker_group
-    
+
     - name: Kill open ssh sessions
       shell: "ps -ef | grep sshd | grep jenkins | awk '{print \"kill -9\", $2}' | sh"
       when: docker_group | changed
       failed_when: false
-    
+
     - name: Updating apt-cache
       apt: update_cache=yes
-    
