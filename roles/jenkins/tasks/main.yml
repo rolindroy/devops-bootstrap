@@ -4,7 +4,7 @@
 - include: install-jenkins.yml
 
 # Configuring Jenkins Server
-- include: configure-jenkins.yml
+# - include: configure-jenkins.yml
 
 # Configure Jenkins job
-- include: configure-job.yml
+# - include: configure-job.yml

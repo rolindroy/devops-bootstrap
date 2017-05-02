@@ -13,7 +13,7 @@
     - name: Installing repo for Java Open JDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
 
-    - name: Updating apt-cache for Java Open JDK 8.
+    - name: Update apt cache for Java Open JDK 8.
       apt: update_cache=yes
 
     - name: Installing Curl and wget
