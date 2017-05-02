@@ -30,34 +30,34 @@
       java_packages:
         - openjdk-8-jdk
 
-    - role: mysql
+    # - role: mysql
 
-    - role: maven
+    # - role: maven
 
-    - role: sonar
+    # - role: sonar
 
     - role: jenkins
 
-  tasks:
-    - name: Install Docker
-      apt: pkg={{ item }} state=latest
-      with_items:
-        - docker
-        - docker.io
-      ignore_errors: True
-
-    - name: Update docker service to run without sudo
-      user: name={{ item }} groups=docker append=yes
-      sudo: true
-      with_items:
-        - "{{ ubuntu_user }}"
-        - jenkins
-      register: docker_group
-
-    - name: Kill open ssh sessions
-      shell: "ps -ef | grep sshd | grep jenkins | awk '{print \"kill -9\", $2}' | sh"
-      when: docker_group | changed
-      failed_when: false
-
-    - name: Updating apt-cache
-      apt: update_cache=yes
+  # tasks:
+  #   - name: Install Docker
+  #     apt: pkg={{ item }} state=latest
+  #     with_items:
+  #       - docker
+  #       - docker.io
+  #     ignore_errors: True
+  #
+  #   - name: Update docker service to run without sudo
+  #     user: name={{ item }} groups=docker append=yes
+  #     sudo: true
+  #     with_items:
+  #       - "{{ ubuntu_user }}"
+  #       - jenkins
+  #     register: docker_group
+  #
+  #   - name: Kill open ssh sessions
+  #     shell: "ps -ef | grep sshd | grep jenkins | awk '{print \"kill -9\", $2}' | sh"
+  #     when: docker_group | changed
+  #     failed_when: false
+  #
+  #   - name: Updating apt-cache
+  #     apt: update_cache=yes
